@@ -506,7 +506,7 @@ def init():
 
 	for i in range(bossNum):
 		if bossData[i][2] == "1":
-			f.append(bossData[i][0] + "R")
+			f.append(bossData[i][0] + "")
 		else:
 			f.append(bossData[i][0])
 		f.append(bossData[i][1] + bossData[i][5])
@@ -1437,7 +1437,7 @@ class mainCog(commands.Cog):
 			command_list += ','.join(command[34]) + ' ※ 관리자만 실행 가능\n\n'     #서버나가기
 			command_list += ','.join(command[22]) + '\n'     #보스탐
 			command_list += ','.join(command[23]) + '\n'     #!보스탐
-			command_list += '[имя босса]наш или [имя босса] наш 0000, 00:00\n'  
+			command_list += '[имя босса] наш или [имя босса] наш 0000, 00:00\n'  
 			command_list += '[имя босса] наш или [имя босса] наш 0000, 00:00\n'   
 			command_list += '[имя босса]멍 или [имя босса]멍 0000, 00:00\n'     
 			command_list += '[имя босса]примерно или [имя босса] примерно 0000, 00:00\n' 
@@ -1450,7 +1450,7 @@ class mainCog(commands.Cog):
 					)
 			embed.add_field(
 					name="----- 추가기능 -----",
-					value= '```- [имя босса]наш/멍/예상  [할말] : 보스시간 입력 후 빈칸 두번!! 메모 가능\n- [имя босса]наш 명령어는 초성으로 입력가능합니다.\n  ex)' + bossData[0][0] + 'наш => ' + convertToInitialLetters(bossData[0][0] +'наш') + ', ' + bossData[0][0] + ' наш => ' + convertToInitialLetters(bossData[0][0] +' наш') + '```'
+					value= '```- [имя босса] наш/멍/예상  [할말] : 보스시간 입력 후 빈칸 두번!! 메모 가능\n- [имя босса] наш 명령어는 초성으로 입력가능합니다.\n  ex)' + bossData[0][0] + ' наш => ' + convertToInitialLetters(bossData[0][0] +' наш') + ', ' + bossData[0][0] + ' наш => ' + convertToInitialLetters(bossData[0][0] +' наш') + '```'
 					)
 			await ctx.send( embed=embed, tts=False)
 		else:
@@ -4035,7 +4035,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 				channel = basicSetting[7]
 				message = msg
 
-				for command_str in ["наш", "멍", "примерно", "удалить", "메모", "카톡켬", "카톡끔"]:
+				for command_str in [" наш", "멍", "примерно", "удалить", "메모", "카톡켬", "카톡끔"]:
 					if command_str in message.content:
 						tmp_msg : str = ""
 						for key, value in boss_nick.items():
@@ -4046,7 +4046,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 
 				for i in range(bossNum):
 					################ 보스 컷처리 ################ 
-					if message.content.startswith(bossData[i][0] +'наш') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'наш')) or message.content.startswith(bossData[i][0] +'наш') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'наш')):
+					if message.content.startswith(bossData[i][0] +' наш') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' наш')) or message.content.startswith(bossData[i][0] +' наш') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' наш')):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
@@ -4054,7 +4054,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 							bossData[i][6] = ''
 
 						curr_now = datetime.datetime.now() + datetime.timedelta(hours = int(basicSetting[0]))
-						tmp_msg = bossData[i][0] +'наш'
+						tmp_msg = bossData[i][0] +' наш'
 						if len(hello) > len(tmp_msg) + 3 :
 							if hello.find(':') != -1 :
 								chkpos = hello.find(':')
