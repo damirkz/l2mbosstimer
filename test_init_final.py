@@ -4242,7 +4242,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 							
 					################ 보스타임 삭제 ################
 						
-					if message.content == bossData[i][0] +'삭제' or message.content == bossData[i][0] +' 삭제':
+					if message.content == bossData[i][0] +'удалить' or message.content == bossData[i][0] +' удалить':
 						bossTime[i] = datetime.datetime.now()+datetime.timedelta(days=365, hours = int(basicSetting[0]))
 						tmp_bossTime[i] =  datetime.datetime.now()+datetime.timedelta(days=365, hours = int(basicSetting[0]))
 						bossTimeString[i] = '99:99:99'
@@ -4253,9 +4253,9 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 						bossFlag0[i] = False
 						bossMungFlag[i] = False
 						bossMungCnt[i] = 0
-						await self.get_channel(channel).send('<' + bossData[i][0] + ' 삭제완료>', tts=False)
+						await self.get_channel(channel).send('<' + bossData[i][0] + ' удаление завершено>', tts=False)
 						await dbSave()
-						print ('<' + bossData[i][0] + ' 삭제완료>')
+						print ('<' + bossData[i][0] + ' удаление завершено>')
 					
 					################ 보스별 메모 ################ 
 
