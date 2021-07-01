@@ -529,14 +529,14 @@ def init():
 		f = []
 
 	regenembed = discord.Embed(
-			title='----- 보스별 리스폰 시간 -----',
+			title='----- ВРЕМЯ РЕСПА БОССОВ -----',
 			description= ' ')
 	for i in range(len(regenTime)):
 		if outputTimeMin[i] == 0 :
-			regenembed.add_field(name=str(outputTimeHour[i]) + '시간', value= '```'+ ', '.join(map(str, sorted(regenbossName[i]))) + '```', inline=False)
+			regenembed.add_field(name=str(outputTimeHour[i]) + 'ч.', value= '```'+ ', '.join(map(str, sorted(regenbossName[i]))) + '```', inline=False)
 		else :
-			regenembed.add_field(name=str(outputTimeHour[i]) + '시간' + str(outputTimeMin[i]) + '분', value= '```' + ','.join(map(str, sorted(regenbossName[i]))) + '```', inline=False)
-	regenembed.set_footer(text = 'R : 멍 보스')
+			regenembed.add_field(name=str(outputTimeHour[i]) + 'ч.' + str(outputTimeMin[i]) + 'мин.', value= '```' + ','.join(map(str, sorted(regenbossName[i]))) + '```', inline=False)
+	regenembed.set_footer(text = '--')#'R : 멍 보스')
 
 	##########################################################
 
@@ -616,21 +616,21 @@ async def dbSave():
 	
 	datelist = list(set(datelist1))
 
-	information1 = '----- 보스탐 정보 -----\n'
+	information1 = '-----ЗАРЕГАННЫЕ БОССЫ-----\n'
 	for timestring in sorted(datelist):
 		for i in range(bossNum):
 			if timestring == bossTime[i]:
 				if bossTimeString[i] != '99:99:99' or bossMungFlag[i] == True :
 					if bossMungFlag[i] == True :
 						if bossData[i][2] == '0' :
-							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (미입력 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
+							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (нет ввода ' + str(bossMungCnt[i]) + 'время)' + ' * ' + bossData[i][6] + '\n'
 						else : 
-							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (멍 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
+							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (멍 ' + str(bossMungCnt[i]) + 'время)' + ' * ' + bossData[i][6] + '\n'
 					else:
 						if bossData[i][2] == '0' :
-							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (미입력 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
+							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (нет ввода ' + str(bossMungCnt[i]) + 'время)' + ' * ' + bossData[i][6] + '\n'
 						else : 
-							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (멍 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
+							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (멍 ' + str(bossMungCnt[i]) + 'время)' + ' * ' + bossData[i][6] + '\n'
 						
 	try :
 		contents = repo.get_contents("my_bot.db")
@@ -784,13 +784,13 @@ async def dbLoad():
 					fixed_bossFlag[j] = True
 					fixed_bossFlag0[j] = True
 			except:
-				raise Exception(f"[fixed_boss.ini] 파일 {tmp_fixed_bossData[j][0]} 부분 양식을 확인하세요.")
+				raise Exception(f"[fixed_boss.ini] Файл {tmp_fixed_bossData[j][0]} проверить.")
 
 		LoadChk = 0
-		print ("<불러오기 완료>")
+		print ("<Загрузка завершена>")
 	else:
 		LoadChk = 1
-		print ("보스타임 정보가 없습니다.")
+		print ("Нет зареганных боссов.")
 
 #고정보스 날짜저장
 async def FixedBossDateSave():
@@ -976,13 +976,13 @@ class taskCog(commands.Cog):
 					try:
 						await self.bot.get_channel(basicSetting[6]).connect(reconnect=True, timeout=5)
 						if self.bot.voice_clients[0].is_connected() :
-							await self.bot.get_channel(channel).send( '< 다시 왔습니다! >', tts=False)
+							await self.bot.get_channel(channel).send( '< Я вернулся! >', tts=False)
 							self.checker = True
-							print("명치복구완료!")
+							print("Успех!")
 					except:
-						await self.bot.get_channel(channel).send( '< 음성채널 접속 에러! >', tts=False)
+						await self.bot.get_channel(channel).send( '< Ошибка подключения к голосовому каналу! >', tts=False)
 						self.checker = False
-						print("명치복구실패!")
+						print("Ошибка!")
 						pass
 					await dbLoad()
 
@@ -991,7 +991,7 @@ class taskCog(commands.Cog):
 			if log_stream.getvalue().find("Awaiting") != -1:
 				log_stream.truncate(0)
 				log_stream.seek(0)
-				await self.bot.get_channel(channel).send( '< 디코접속에러! 잠깐 나갔다 올께요! >', tts=False)
+				await self.bot.get_channel(channel).send( '< Ошибка соединения! >', tts=False)
 				await dbSave()
 				break
 			
@@ -1393,8 +1393,8 @@ class mainCog(commands.Cog):
 	async def menu_(self, ctx):
 		if ctx.message.channel.id == basicSetting[7]:
 			command_list = ''
-			command_list += ','.join(command[2]) + '\n'     #!설정확인
-			command_list += ','.join(command[3]) + '\n'     #!채널확인
+			command_list += ','.join(command[2]) + '\n'     #Проверка настроек
+			command_list += ','.join(command[3]) + '\n'     #Проверка канала
 			command_list += ','.join(command[4]) + ' [채널명]\n'     #!채널이동
 			command_list += ','.join(command[5]) + ' ※ 관리자만 실행 가능\n'     #!소환
 			command_list += ','.join(command[6]) + '\n'     #!불러오기
