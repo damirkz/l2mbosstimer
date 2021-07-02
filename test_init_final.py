@@ -529,7 +529,7 @@ def init():
 		f = []
 
 	regenembed = discord.Embed(
-			title='----- ВРЕМЯ РЕСПА БОССОВ -----',
+			title='----- BOSS RESPAWN TIME -----',
 			description= ' ')
 	for i in range(len(regenTime)):
 		if outputTimeMin[i] == 0 :
