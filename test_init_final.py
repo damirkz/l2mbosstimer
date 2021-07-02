@@ -317,7 +317,7 @@ def init():
 		basicSetting.append(inputData[18][12:])    #basicSetting[14] : 시트 이름
 		basicSetting.append(inputData[19][12:])    #basicSetting[15] : 입력 셀
 		basicSetting.append(inputData[20][13:])    #basicSetting[16] : 출력 셀
-		basicSetting.append(inputData[12][13:])     #basicSetting[17] : 멍delete횟수
+		basicSetting.append(inputData[12][13:])     #basicSetting[17] : missdelete횟수
 		basicSetting.append(inputData[5][14:])     #basicSetting[18] : kill채널 ID
 		basicSetting.append(inputData[6][16:])     #basicSetting[19] : racing 채널 ID
 		basicSetting.append(inputData[7][14:])     #basicSetting[20] : item 채널 ID
@@ -433,7 +433,7 @@ def init():
 				tmp_nick.append(convertToInitialLetters(nick))			
 			boss_nick[tmp_boss_name_list[0]] = tmp_nick
 		f.append(tmp_bossData[j][1][10:tmp_len])  #bossData[1] : hour
-		f.append(tmp_bossData[j][2][13:])         #bossData[2] : 멍/미입력
+		f.append(tmp_bossData[j][2][13:])         #bossData[2] : miss/미입력
 		f.append(tmp_bossData[j][3][20:])         #bossData[3] : 분전 알림멘트
 		f.append(tmp_bossData[j][4][13:])         #bossData[4] : 젠 알림멘트
 		f.append(tmp_bossData[j][1][tmp_len+1:])  #bossData[5] : minute
@@ -536,7 +536,7 @@ def init():
 			regenembed.add_field(name=str(outputTimeHour[i]) + '시간', value= '```'+ ', '.join(map(str, sorted(regenbossName[i]))) + '```', inline=False)
 		else :
 			regenembed.add_field(name=str(outputTimeHour[i]) + '시간' + str(outputTimeMin[i]) + 'minute', value= '```' + ','.join(map(str, sorted(regenbossName[i]))) + '```', inline=False)
-	regenembed.set_footer(text = 'R : 멍 보스')
+	regenembed.set_footer(text = 'R : miss 보스')
 
 	##########################################################
 
@@ -625,12 +625,12 @@ async def dbSave():
 						if bossData[i][2] == '0' :
 							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (미입력 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
 						else : 
-							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (멍 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
+							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (miss ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
 					else:
 						if bossData[i][2] == '0' :
 							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (미입력 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
 						else : 
-							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (멍 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
+							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (miss ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
 						
 	try :
 		contents = repo.get_contents("my_bot.db")
@@ -1165,7 +1165,7 @@ class taskCog(commands.Cog):
 						except:
 							pass
 
-					################ 보스 자동 멍 처리 ################ 
+					################ 보스 자동 miss 처리 ################ 
 					if bossMungFlag[i] == True:
 						if bossData[i][7] == "1":
 							aftr = tmp_aftr1
@@ -1213,7 +1213,7 @@ class taskCog(commands.Cog):
 												await PlaySound(self.bot.voice_clients[0], './sound/' + bossData[i][0] + '미입력.mp3')
 										except:
 											pass
-									################ 멍 보스 ################
+									################ miss 보스 ################
 									else :
 										bossFlag[i] = False
 										bossFlag0[i] = False
@@ -1222,7 +1222,7 @@ class taskCog(commands.Cog):
 										tmp_bossTime[i] = bossTime[i] = nextTime = tmp_bossTime[i]+datetime.timedelta(hours=int(bossData[i][1]), minutes=int(bossData[i][5]))
 										tmp_bossTimeString[i] = bossTimeString[i] = nextTime.strftime('%H:%M:%S')
 										tmp_bossDateString[i] = bossDateString[i] = nextTime.strftime('%Y-%m-%d')
-										await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' 멍 입니다.```')
+										await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' miss 입니다.```')
 										embed = discord.Embed(
 											description= '```NEXT ' + bossData[i][0] + ' ' + bossTimeString[i] + '입니다.```',
 											color=0xff0000
@@ -1411,7 +1411,7 @@ class mainCog(commands.Cog):
 			command_list += ','.join(command[13]) + ' [아이디]\n'     #!정산
 			command_list += ','.join(command[14]) + ' 또는 ' + ','.join(command[14]) + ' 0000, 00:00\n'     #!보스일괄
 			command_list += ','.join(command[40]) + ' 또는 ' + ','.join(command[40]) + ' 0000, 00:00\n'     #!멍일괄
-			command_list += ','.join(command[43]) + f' [00:00:00 : 보스명(엔터) ...]\n※ 보스탐 결과 복붙 가능\nex){command[43][0]} + 12:34:00 : {bossData[0][0]}\n+ 10:56:00 : {bossData[1][0]}\n+ (+1d) 12:12:00 : {bossData[2][0]}...\n'     #!컷등록
+			command_list += ','.join(command[43]) + f' [00:00:00 : 보스명(엔터) ...]\n※ 보스탐 결과 복붙 가능\nex){command[43][0]} + 12:34:00 : {bossData[0][0]}\n+ 10:56:00 : {bossData[1][0]}\n+ (+1d) 12:12:00 : {bossData[2][0]}...\n'     #!kill등록
 			command_list += ','.join(command[44]) + f' [00:00:00 : 보스명(엔터) ...]\n※ [00:00:00 보스명] 형태로 여러줄(엔터)로 구분하여 등록\nex){command[44][0]} + 12:34:00 : {bossData[0][0]}\n10:56:00 : {bossData[1][0]}\n+ (+1d) 12:12:00 : {bossData[2][0]}...\n'     #!predict등록
 			command_list += ','.join(command[45]) + ' [시간(00:00)] [추가시간(숫자)] [보스명1] [보스명2] [보스명3] ...\n'     #!추가등록
 			command_list += ','.join(command[15]) + '\n'     #!q
@@ -1437,9 +1437,9 @@ class mainCog(commands.Cog):
 			command_list += ','.join(command[34]) + ' ※ 관리자만 실행 가능\n\n'     #서버나가기
 			command_list += ','.join(command[22]) + '\n'     #보스탐
 			command_list += ','.join(command[23]) + '\n'     #!보스탐
-			command_list += '[보스명]컷 또는 [보스명]컷 0000, 00:00\n'  
-			command_list += '[보스명] 컷 또는 [보스명] 컷 0000, 00:00\n'   
-			command_list += '[보스명]멍 또는 [보스명]멍 0000, 00:00\n'     
+			command_list += '[보스명]kill 또는 [보스명]kill 0000, 00:00\n'  
+			command_list += '[보스명] kill 또는 [보스명] kill 0000, 00:00\n'   
+			command_list += '[보스명]miss 또는 [보스명]miss 0000, 00:00\n'     
 			command_list += '[보스명]predict 또는 [보스명]predict 0000, 00:00\n' 
 			command_list += '[보스명]delete\n'     
 			command_list += '[보스명]메모 [할말]\n'
@@ -1450,7 +1450,7 @@ class mainCog(commands.Cog):
 					)
 			embed.add_field(
 					name="----- 추가기능 -----",
-					value= '```- [보스명]컷/멍/predict  [할말] : 보스시간 입력 후 빈칸 두번!! 메모 가능\n- [보스명]컷 명령어는 초성으로 입력가능합니다.\n  ex)' + bossData[0][0] + '컷 => ' + convertToInitialLetters(bossData[0][0] +'컷') + ', ' + bossData[0][0] + ' 컷 => ' + convertToInitialLetters(bossData[0][0] +' 컷') + '```'
+					value= '```- [보스명]kill/miss/predict  [할말] : 보스시간 입력 후 빈칸 두번!! 메모 가능\n- [보스명]kill 명령어는 초성으로 입력가능합니다.\n  ex)' + bossData[0][0] + 'kill => ' + convertToInitialLetters(bossData[0][0] +'kill') + ', ' + bossData[0][0] + ' kill => ' + convertToInitialLetters(bossData[0][0] +' kill') + '```'
 					)
 			await ctx.send( embed=embed, tts=False)
 		else:
@@ -2428,7 +2428,7 @@ class mainCog(commands.Cog):
 							if ouput_bossData[i][5] == 0 :
 								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' ' + ouput_bossData[i][6] + '\n'
 							else :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' (멍 ' + str(ouput_bossData[i][5]) + '회)' + ' ' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' (miss ' + str(ouput_bossData[i][5]) + '회)' + ' ' + ouput_bossData[i][6] + '\n'
 
 			if len(boss_information) == 1 and len(tmp_boss_information) == 1:
 				###########################
@@ -2565,8 +2565,8 @@ class mainCog(commands.Cog):
 							
 						# aa.append(bossTime[i].strftime('%H:%M:%S'))      #output_bossData[2] : 시간(00:00:00) -> 초빼기 : aa.append(bossTime[i].strftime('%H:%M'))
 						aa.append('+')	                                 #output_bossData[3] : +
-					aa.append(bossData[i][2])                            #output_bossData[4] : 멍/미입력 보스
-					aa.append(bossMungCnt[i])	                         #output_bossData[5] : 멍/미입력횟수
+					aa.append(bossData[i][2])                            #output_bossData[4] : miss/미입력 보스
+					aa.append(bossMungCnt[i])	                         #output_bossData[5] : miss/미입력횟수
 					aa.append(bossData[i][6])	                         #output_bossData[6] : 메세지
 					ouput_bossData.append(aa)
 					aa = []
@@ -2611,7 +2611,7 @@ class mainCog(commands.Cog):
 							if ouput_bossData[i][5] == 0 :
 								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' ' + ouput_bossData[i][6] + '\n'
 							else :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' (멍 ' + str(ouput_bossData[i][5]) + '회)' + ' ' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' (miss ' + str(ouput_bossData[i][5]) + '회)' + ' ' + ouput_bossData[i][6] + '\n'
 
 			###########################고정보스출력
 			if len(fixedboss_information[0]) != 0:
@@ -4035,7 +4035,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 				channel = basicSetting[7]
 				message = msg
 
-				for command_str in ["컷", "멍", "predict", "delete", "메모", "카톡켬", "카톡끔"]:
+				for command_str in ["kill", "miss", "predict", "delete", "메모", "카톡켬", "카톡끔"]:
 					if command_str in message.content:
 						tmp_msg : str = ""
 						for key, value in boss_nick.items():
@@ -4046,7 +4046,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 
 				for i in range(bossNum):
 					################ 보스 컷처리 ################ 
-					if message.content.startswith(bossData[i][0] +'컷') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'컷')) or message.content.startswith(bossData[i][0] +' 컷') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' 컷')):
+					if message.content.startswith(bossData[i][0] +'kill') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'kill')) or message.content.startswith(bossData[i][0] +' kill') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' kill')):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
@@ -4054,7 +4054,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 							bossData[i][6] = ''
 
 						curr_now = datetime.datetime.now() + datetime.timedelta(hours = int(basicSetting[0]))
-						tmp_msg = bossData[i][0] +'컷'
+						tmp_msg = bossData[i][0] +'kill'
 						if len(hello) > len(tmp_msg) + 3 :
 							if hello.find(':') != -1 :
 								chkpos = hello.find(':')
@@ -4108,16 +4108,16 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 								)
 						await self.get_channel(channel).send(embed=embed, tts=False)
 
-					################ 보스 멍 처리 ################ 
+					################ 보스 miss 처리 ################ 
 
-					if message.content.startswith(bossData[i][0] +'멍') or message.content.startswith(bossData[i][0] +' 멍'):
+					if message.content.startswith(bossData[i][0] +'miss') or message.content.startswith(bossData[i][0] +' miss'):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
 						else:
 							bossData[i][6] = ''
 							
-						tmp_msg = bossData[i][0] +'멍'
+						tmp_msg = bossData[i][0] +'miss'
 						tmp_now = datetime.datetime.now() + datetime.timedelta(hours = int(basicSetting[0]))
 
 						if len(hello) > len(tmp_msg) + 3 :
