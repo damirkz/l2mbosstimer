@@ -1195,6 +1195,7 @@ class taskCog(commands.Cog):
 								else:
 									################ 미입력 보스 ################
 									if bossData[i][2] == '0':
+										print('미입력 보스 line 1196')
 										bossFlag[i] = False
 										bossFlag0[i] = False
 										bossMungFlag[i] = False
@@ -1205,7 +1206,7 @@ class taskCog(commands.Cog):
 										await self.bot.get_channel(channel).send("```" +  bossData[i][0] + ' 미입력 됐습니다.```', tts=False)
 										embed = discord.Embed(
 											description= '```NEXT ' + bossData[i][0] + ' ' + bossTimeString[i] + '입니다.```',
-											color=#FF9900
+											color=0xff0000
 											)
 										await self.bot.get_channel(channel).send(embed=embed, tts=False)
 										try:
@@ -1215,6 +1216,7 @@ class taskCog(commands.Cog):
 											pass
 									################ miss 보스 ################
 									else :
+										print('miss boss line 1219')
 										bossFlag[i] = False
 										bossFlag0[i] = False
 										bossMungFlag[i] = False
@@ -1225,7 +1227,7 @@ class taskCog(commands.Cog):
 										await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' miss 입니다.```')
 										embed = discord.Embed(
 											description= '```NEXT ' + bossData[i][0] + ' ' + bossTimeString[i] + '입니다.```',
-											color=#FFFF00
+											color=0xff0000
 											)
 										await self.bot.get_channel(channel).send(embed=embed, tts=False)
 										try:
@@ -2212,6 +2214,7 @@ class mainCog(commands.Cog):
 
 								result_lefttime += 'NEXT ' + ouput_bossData[i][0] + '탐까지 %02d:%02d:%02d 남았습니다. ' % (hours,minutes,seconds) + '[' +  ouput_bossData[i][2] + ']\n'
 				else :
+					print('2219')
 					for j in range(len(sorted_datelist)):
 						for i in range(len(ouput_bossData)):						
 							if sorted_datelist[j] == ouput_bossData[i][1]:
@@ -2224,7 +2227,7 @@ class mainCog(commands.Cog):
 								result_lefttime += 'NEXT ' + ouput_bossData[i][0] + '탐까지 %02d:%02d:%02d 남았습니다. ' % (hours,minutes,seconds) + '[' +  ouput_bossData[i][2] + ']\n'
 				embed = discord.Embed(
 					description= result_lefttime,
-					color=#00FF00
+					color=0xff0000
 					)
 				await ctx.send( embed=embed, tts=False)
 		else:
@@ -4101,10 +4104,10 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 						if tmp_bossTime[i] < curr_now + datetime.timedelta(minutes=int(basicSetting[1])):
 							bossFlag[i] = True
 							bossFlag0[i] = True
-
+						print('4107')
 						embed = discord.Embed(
 								description= '```NEXT ' + bossData[i][0] + ' ' + bossTimeString[i] + '입니다.```',
-								color=#00FFFF
+								color=0xff0000
 								)
 						await self.get_channel(channel).send(embed=embed, tts=False)
 
@@ -4155,10 +4158,10 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 							if tmp_bossTime[i] < tmp_now + datetime.timedelta(minutes=int(basicSetting[1])):
 								bossFlag[i] = True
 								bossFlag0[i] = True
-
+							print('4161')
 							embed = discord.Embed(
 									description= '```NEXT ' + bossData[i][0] + ' ' + bossTimeString[i] + '입니다.```',
-									color=#9900FF
+									color=0xff0000
 									)
 							await self.get_channel(channel).send(embed=embed, tts=False)
 						else:
@@ -4179,10 +4182,10 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 								if tmp_bossTime[i] < tmp_now + datetime.timedelta(minutes=int(basicSetting[1])):
 									bossFlag[i] = True
 									bossFlag0[i] = True
-
+								print('4185')
 								embed = discord.Embed(
 										description= '```NEXT ' + bossData[i][0] + ' ' + bossTimeString[i] + '입니다.```',
-										color=#FF00FF
+										color=0xff0000
 										)
 								await self.get_channel(channel).send(embed=embed, tts=False)
 							else:
@@ -4231,10 +4234,10 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 							if tmp_bossTime[i] < now2 + datetime.timedelta(minutes=int(basicSetting[1])):
 								bossFlag[i] = True
 								bossFlag0[i] = True		
-									
+							print('4237')		
 							embed = discord.Embed(
 									description= '```NEXT ' + bossData[i][0] + ' ' + bossTimeString[i] + '입니다.```',
-									color=#660000
+									color=0xff0000
 									)
 							await self.get_channel(channel).send(embed=embed, tts=False)
 						else:
