@@ -616,7 +616,7 @@ async def dbSave():
 	
 	datelist = list(set(datelist1))
 
-	information1 = '----- 보스탐 정보 -----\n'
+	information1 = '----- Registered Bosses-----\n'
 	for timestring in sorted(datelist):
 		for i in range(bossNum):
 			if timestring == bossTime[i]:
@@ -1452,7 +1452,7 @@ class mainCog(commands.Cog):
 					)
 			embed.add_field(
 					name="----- 추가기능 -----",
-					value= '```- [보스명]kill/miss/predict  [할말] : 보스시간 입력 후 빈칸 두번!! 메모 가능\n- [보스명]kill 명령어는 초성으로 입력가능합니다.\n  ex)' + bossData[0][0] + 'kill => ' + convertToInitialLetters(bossData[0][0] +'kill') + ', ' + bossData[0][0] + ' kill => ' + convertToInitialLetters(bossData[0][0] +' kill') + '```'
+					value= '```- [보스명]kill/miss/predict  [할말] : 보스시간 입력 후 빈칸 두번!! 메모 가능\n- [보스명]kill 명령어는 초성으로 입력가능합니다.\n  ex)' + bossData[0][0] + 'kill => ' + bossData[0][0] +'kill' + ', ' + bossData[0][0] + ' kill => ' + bossData[0][0] +' kill' + '```'
 					)
 			await ctx.send( embed=embed, tts=False)
 		else:
@@ -2446,7 +2446,7 @@ class mainCog(commands.Cog):
 					tmp_boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-						title = "----- 보스탐 정보 -----",
+						title = "----- Registered Bosses -----",
 						description= boss_information[0],
 						color=0x0000ff
 						)
@@ -2464,7 +2464,7 @@ class mainCog(commands.Cog):
 					boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-						title = "----- 보스탐 정보 -----",
+						title = "----- Registered Bosses -----",
 						description= boss_information[0],
 						color=0x0000ff
 						)
@@ -2648,7 +2648,7 @@ class mainCog(commands.Cog):
 				boss_information[0] = '``` ```'
 
 			embed = discord.Embed(
-					title = "----- 보스탐 정보 -----",
+					title = "----- Registered Bosses -----",
 					description= boss_information[0],
 					color=0x0000ff
 					)
@@ -4049,7 +4049,7 @@ class IlsangDistributionBot(commands.AutoShardedBot):
 
 				for i in range(bossNum):
 					################ 보스 컷처리 ################ 
-					if message.content.startswith(bossData[i][0] +'kill') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'kill')) or message.content.startswith(bossData[i][0] +' kill') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' kill')):
+					if message.content.startswith(bossData[i][0] +'kill') or message.content.startswith(bossData[i][0] +' kill'):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
