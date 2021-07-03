@@ -506,7 +506,7 @@ def init():
 
 	for i in range(bossNum):
 		if bossData[i][2] == "1":
-			f.append(bossData[i][0] + "R")
+			f.append(bossData[i][0] + " ?")
 		else:
 			f.append(bossData[i][0])
 		f.append(bossData[i][1] + bossData[i][5])
@@ -529,14 +529,14 @@ def init():
 		f = []
 
 	regenembed = discord.Embed(
-			title='----- 보스별 리스폰 시간 -----',
+			title='----- BOSS RESPAWN TIME-----',
 			description= ' ')
 	for i in range(len(regenTime)):
 		if outputTimeMin[i] == 0 :
-			regenembed.add_field(name=str(outputTimeHour[i]) + '시간', value= '```'+ ', '.join(map(str, sorted(regenbossName[i]))) + '```', inline=False)
+			regenembed.add_field(name=str(outputTimeHour[i]) + 'Hours', value= '```'+ ', '.join(map(str, sorted(regenbossName[i]))) + '```', inline=False)
 		else :
-			regenembed.add_field(name=str(outputTimeHour[i]) + '시간' + str(outputTimeMin[i]) + 'minute', value= '```' + ','.join(map(str, sorted(regenbossName[i]))) + '```', inline=False)
-	regenembed.set_footer(text = 'R : miss 보스')
+			regenembed.add_field(name=str(outputTimeHour[i]) + 'Hours' + str(outputTimeMin[i]) + 'minute', value= '```' + ','.join(map(str, sorted(regenbossName[i]))) + '```', inline=False)
+	regenembed.set_footer(text = '? : Боссы, которые могут не заспавниться')
 
 	##########################################################
 
