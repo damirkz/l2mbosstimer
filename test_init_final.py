@@ -616,7 +616,7 @@ async def dbSave():
 	
 	datelist = list(set(datelist1))
 
-	information1 = '----- Registered Bosses -----\n'
+	information1 = '-----  -----\n'
 	for timestring in sorted(datelist):
 		for i in range(bossNum):
 			if timestring == bossTime[i]:
