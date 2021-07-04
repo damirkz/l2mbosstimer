@@ -616,7 +616,7 @@ async def dbSave():
 	
 	datelist = list(set(datelist1))
 
-	information1 = '-----  -----\n'
+	information1 = '----- Registered Bosses -----\n'
 	for timestring in sorted(datelist):
 		for i in range(bossNum):
 			if timestring == bossTime[i]:
@@ -1057,51 +1057,51 @@ class taskCog(commands.Cog):
 					await init_data_list('kill_list.ini', '-----척살명단-----')
 
 				################ 고정 보스 확인 ################ 
-				#for i in range(fixed_bossNum):
-				#	if int(basicSetting[3]) == 0:
-				#		fixed_bossFlag0[i] = True
-				#	if int(basicSetting[1]) == 0:
-				#		fixed_bossFlag[i] = True
-				#	################ before_alert1 ################ 
-				#	if fixed_bossTime[i] <= priv0 and fixed_bossTime[i] > priv:
-				#		if basicSetting[3] != '0':
-				#			if fixed_bossFlag0[i] == False:
-				#				fixed_bossFlag0[i] = True
-				#				await self.bot.get_channel(channel).send("```" + fixed_bossData[i][0] + ' ' + basicSetting[3] + 'minutes till ' + fixed_bossData[i][3] +' [' +  fixed_bossTime[i].strftime('%H:%M:%S') + ']```', tts=False)
-				#				try:
-				#					if basicSetting[21] == "1":
-				#						await PlaySound(self.bot.voice_clients[0], './sound/' + fixed_bossData[i][0] + '알림1.mp3')
-				#				except:
-				#					pass
-#
-				#	################ before_alert ################ 
-				#	if fixed_bossTime[i] <= priv and fixed_bossTime[i] > now and fixed_bossFlag0[i] == True :
-				#		if basicSetting[1] != '0' :
-				#			if fixed_bossFlag[i] == False:
-				#				fixed_bossFlag[i] = True
-				#				await self.bot.get_channel(channel).send("```" + fixed_bossData[i][0] + ' ' + basicSetting[1] + 'minutes till ' + fixed_bossData[i][3] +' [' +  fixed_bossTime[i].strftime('%H:%M:%S') + ']```', tts=False)
-				#				try:
-				#					if basicSetting[21] == "1":
-				#						await PlaySound(self.bot.voice_clients[0], './sound/' + fixed_bossData[i][0] + '알림.mp3')
-				#				except:
-				#					pass
-				#	
-				#	################ 보스 젠 시간 확인 ################
-				#	if fixed_bossTime[i] <= now and fixed_bossFlag[i] == True and fixed_bossFlag0[i] == True :
-				#		fixed_bossTime[i] = fixed_bossTime[i]+datetime.timedelta(hours=int(fixed_bossData[i][5]), minutes=int(fixed_bossData[i][6]), seconds = int(0))
-				#		fixed_bossFlag0[i] = False
-				#		fixed_bossFlag[i] = False
-				#		embed = discord.Embed(
-				#				description= "```" + fixed_bossData[i][0] + fixed_bossData[i][4] + "```" ,
-				#				color=0x00ff00
-				#				)
-				#		await self.bot.get_channel(channel).send(embed=embed, tts=False)
-				#		try:
-				#			if basicSetting[21] == "1":
-				#				await PlaySound(self.bot.voice_clients[0], './sound/' + fixed_bossData[i][0] + '젠.mp3')
-				#		except:
-				#			pass
-#
+				for i in range(fixed_bossNum):
+					if int(basicSetting[3]) == 0:
+						fixed_bossFlag0[i] = True
+					if int(basicSetting[1]) == 0:
+						fixed_bossFlag[i] = True
+					################ before_alert1 ################ 
+					if fixed_bossTime[i] <= priv0 and fixed_bossTime[i] > priv:
+						if basicSetting[3] != '0':
+							if fixed_bossFlag0[i] == False:
+								fixed_bossFlag0[i] = True
+								#await self.bot.get_channel(channel).send("```" + fixed_bossData[i][0] + ' ' + basicSetting[3] + 'minutes till ' + fixed_bossData[i][3] +' [' +  fixed_bossTime[i].strftime('%H:%M:%S') + ']```', tts=False)
+								try:
+									if basicSetting[21] == "1":
+										await PlaySound(self.bot.voice_clients[0], './sound/' + fixed_bossData[i][0] + '알림1.mp3')
+								except:
+									pass
+
+					################ before_alert ################ 
+					if fixed_bossTime[i] <= priv and fixed_bossTime[i] > now and fixed_bossFlag0[i] == True :
+						if basicSetting[1] != '0' :
+							if fixed_bossFlag[i] == False:
+								fixed_bossFlag[i] = True
+								#await self.bot.get_channel(channel).send("```" + fixed_bossData[i][0] + ' ' + basicSetting[1] + 'minutes till ' + fixed_bossData[i][3] +' [' +  fixed_bossTime[i].strftime('%H:%M:%S') + ']```', tts=False)
+								try:
+									if basicSetting[21] == "1":
+										await PlaySound(self.bot.voice_clients[0], './sound/' + fixed_bossData[i][0] + '알림.mp3')
+								except:
+									pass
+					
+					################ 보스 젠 시간 확인 ################
+					if fixed_bossTime[i] <= now and fixed_bossFlag[i] == True and fixed_bossFlag0[i] == True :
+						fixed_bossTime[i] = fixed_bossTime[i]+datetime.timedelta(hours=int(fixed_bossData[i][5]), minutes=int(fixed_bossData[i][6]), seconds = int(0))
+						fixed_bossFlag0[i] = False
+						fixed_bossFlag[i] = False
+						embed = discord.Embed(
+								description= "```" + fixed_bossData[i][0] + fixed_bossData[i][4] + "```" ,
+								color=0x00ff00
+								)
+						#await self.bot.get_channel(channel).send(embed=embed, tts=False)
+						try:
+							if basicSetting[21] == "1":
+								await PlaySound(self.bot.voice_clients[0], './sound/' + fixed_bossData[i][0] + '젠.mp3')
+						except:
+							pass
+
 				################ 일반 보스 확인 ################ 
 				for i in range(bossNum):
 					if int(basicSetting[3]) == 0:
@@ -1809,7 +1809,7 @@ class mainCog(commands.Cog):
 					tmp_boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-						title = "----- Non-registered Bosses -----",
+						title = "----- 미예약 보스 -----",
 						description= tmp_boss_information[0],
 						color=0x0000ff
 						)
@@ -1824,7 +1824,7 @@ class mainCog(commands.Cog):
 					tmp_boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-					title = "----- Non-registered Bosses -----",
+					title = "----- 미예약 보스 -----",
 					description= tmp_boss_information[0],
 					color=0x0000ff
 					)
@@ -2443,12 +2443,12 @@ class mainCog(commands.Cog):
 					tmp_boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-						title = "----- Registered Bosses -----",
+						title = "----- 보스탐 정보 -----",
 						description= boss_information[0],
 						color=0x0000ff
 						)
 				embed.add_field(
-						name="----- Non-registered Bosses -----",
+						name="----- 미예약 보스 -----",
 						value= tmp_boss_information[0],
 						inline = False
 						)				
@@ -2461,7 +2461,7 @@ class mainCog(commands.Cog):
 					boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-						title = "----- Registered Bosses -----",
+						title = "----- 보스탐 정보 -----",
 						description= boss_information[0],
 						color=0x0000ff
 						)
@@ -2488,7 +2488,7 @@ class mainCog(commands.Cog):
 					tmp_boss_information[0] = '``` ```'
 
 				embed = discord.Embed(
-					title = "----- Non-registered Bosses -----",
+					title = "----- 미예약 보스 -----",
 					description= tmp_boss_information[0],
 					color=0x0000ff
 					)
@@ -2620,7 +2620,7 @@ class mainCog(commands.Cog):
 				fixedboss_information[0] = '``` ```'
 	
 			embed = discord.Embed(
-					title = "----- World Bosses -----",
+					title = "----- 고 정 보 스 -----",
 					description= fixedboss_information[0],
 					color=0x0000ff
 					)
@@ -2645,7 +2645,7 @@ class mainCog(commands.Cog):
 				boss_information[0] = '``` ```'
 
 			embed = discord.Embed(
-					title = "----- Registered Bosses -----",
+					title = "----- 보스탐 정보 -----",
 					description= boss_information[0],
 					color=0x0000ff
 					)
@@ -2673,7 +2673,7 @@ class mainCog(commands.Cog):
 				tmp_boss_information[0] = '``` ```'
 
 			embed = discord.Embed(
-				title = "----- Non-registered Bosses -----",
+				title = "----- 미예약 보스 -----",
 				description= tmp_boss_information[0],
 				color=0x0000ff
 				)
