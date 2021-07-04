@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*- 
 
-################ Server Ve2r. 28 (2021. 6. 23.) #####################
+################ Server Ver. 28 (2021. 6. 23.) #####################
 
 import sys, os, ctypes
 import asyncio, discord, aiohttp
@@ -1222,7 +1222,7 @@ class taskCog(commands.Cog):
 										tmp_bossTime[i] = bossTime[i] = nextTime = tmp_bossTime[i]+datetime.timedelta(hours=int(bossData[i][1]), minutes=int(bossData[i][5]))
 										tmp_bossTimeString[i] = bossTimeString[i] = nextTime.strftime('%H:%M:%S')
 										tmp_bossDateString[i] = bossDateString[i] = nextTime.strftime('%Y-%m-%d')
-										await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' didn't spawn.```')
+										await self.bot.get_channel(channel).send("```" + bossData[i][0] + ' did not spawn.```')
 										embed = discord.Embed(
 											description= '```NEXT ' + bossData[i][0] + ' ' + bossTimeString[i] + '.```',
 											color=0xff0000
