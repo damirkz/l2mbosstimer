@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*- 
 
-################ Server er. 28 (2021. 6. 23.) #####################
+################ Server 3Ver. 28 (2021. 6. 23.) #####################
 
 import sys, os, ctypes
 import asyncio, discord, aiohttp
@@ -3866,9 +3866,10 @@ class mainCog(commands.Cog):
 			return await ctx.send('```보이스를 사용하지 않도록 설정되어 있습니다.```', tts=False)
 		return await PlaySound(ctx.voice_client, './sound/언니.mp3')
 	##XLSX IMPORT
-	@client.event
-		async def on_message(message):
-			if message.author == client.user:
+	@commands.command(name='!import')
+	async def on_message(message):
+		if message.author == client.user:
+			return
     if message.content == '!import':
         path = "https://onedrive.live.com/view.aspx?resid=FFA97C0083E35D4A!106&ithint=file%2cxlsx&authkey=!AGRmMBYkmOqYaMo"
 		wb_obj = openpyxl.load_workbook(path)
