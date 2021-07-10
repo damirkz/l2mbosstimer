@@ -15,7 +15,7 @@ from oauth2client.service_account import ServiceAccountCredentials #정산
 from io import StringIO
 import urllib.request
 from math import ceil, floor
-
+import openpyxl
 ##################### 로깅 ###########################
 log_stream = StringIO()    
 logging.basicConfig(stream=log_stream, level=logging.WARNING)
@@ -1445,6 +1445,7 @@ class mainCog(commands.Cog):
 			command_list += '[보스명]예상 또는 [보스명]예상 0000, 00:00\n' 
 			command_list += '[보스명]삭제\n'     
 			command_list += '[보스명]메모 [할말]\n'
+			command_list += ','.join(command[46]) + 'XLSX Import'     #!보스탐
 			embed = discord.Embed(
 					title = "----- 명령어 -----",
 					description= '```' + command_list + '```',
@@ -3864,7 +3865,19 @@ class mainCog(commands.Cog):
 		if basicSetting[21] != "1":
 			return await ctx.send('```보이스를 사용하지 않도록 설정되어 있습니다.```', tts=False)
 		return await PlaySound(ctx.voice_client, './sound/언니.mp3')
-
+	##XLSX IMPORT
+	@client.event
+		async def on_message(message):
+			if message.author == client.user:
+    if message.content == '!import':
+        path = "https://onedrive.live.com/view.aspx?resid=FFA97C0083E35D4A!106&ithint=file%2cxlsx&authkey=!AGRmMBYkmOqYaMo"
+		wb_obj = openpyxl.load_workbook(path)
+		sheet_obj = wb_obj.active
+ 
+# print the total number of rows
+		print(sheet_obj.max_row)
+        await message.channel.send(response)
+		
 	@commands.command(name='!형')
 	async def brother2_(self, ctx):
 		if basicSetting[21] != "1":
