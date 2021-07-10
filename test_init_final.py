@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*- 
 
-################ Server Ver. 28 (2021. 6. 23.) #####################
+################ Server 3Ver. 28 (2021. 6. 23.) #####################
 
 import sys, os, ctypes
 import asyncio, discord, aiohttp
@@ -711,9 +711,11 @@ async def dbLoad():
 					bossData[j][6] = beforeBossData[i+1][tmp_msglen+2:len(beforeBossData[i+1])]
 
 					if beforeBossData[i+1][tmp_msglen-4:tmp_msglen-3] != 0 and beforeBossData[i+1][tmp_msglen-5:tmp_msglen-4] == ' ':
-						bossMungCnt[j] = float(beforeBossData[i+1][tmp_msglen-4:tmp_msglen-3]) + tmp_mungcnt
+						bossMungCnt[j] = 0
+						# float(beforeBossData[i+1][tmp_msglen-4:tmp_msglen-3]) + tmp_mungcnt
 					elif beforeBossData[i+1][tmp_msglen-5:tmp_msglen-4] != ' ':
-						bossMungCnt[j] = float(beforeBossData[i+1][tmp_msglen-5:tmp_msglen-4] + beforeBossData[i+1][tmp_msglen-4:tmp_msglen-3]) + tmp_mungcnt
+						bossMungCnt[j] = 0
+						# float(beforeBossData[i+1][tmp_msglen-5:tmp_msglen-4] + beforeBossData[i+1][tmp_msglen-4:tmp_msglen-3]) + tmp_mungcnt
 					else:
 						bossMungCnt[j] = 0
 
@@ -1443,7 +1445,6 @@ class mainCog(commands.Cog):
 			command_list += '[보스명]예상 또는 [보스명]예상 0000, 00:00\n' 
 			command_list += '[보스명]삭제\n'     
 			command_list += '[보스명]메모 [할말]\n'
-			command_list += ','.join(command[46]) + 'Import data from Excel'
 			embed = discord.Embed(
 					title = "----- 명령어 -----",
 					description= '```' + command_list + '```',
