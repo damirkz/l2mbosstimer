@@ -3664,7 +3664,7 @@ class mainCog(commands.Cog):
 		if not args:
 			return await ctx.send('```보스타임 정보를 입력해주세요```', tts=False)
 
-		boss_data_list : list = args.split(" ")
+		boss_data_list : list = args.split(" -- ")
 		boss_data_dict : dict = {}
 		result_boss_name : list = []
 
