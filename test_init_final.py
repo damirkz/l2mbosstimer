@@ -3865,20 +3865,7 @@ class mainCog(commands.Cog):
 		if basicSetting[21] != "1":
 			return await ctx.send('```보이스를 사용하지 않도록 설정되어 있습니다.```', tts=False)
 		return await PlaySound(ctx.voice_client, './sound/언니.mp3')
-	##XLSX IMPORT
-	@commands.command(name='!import')
-	async def on_message(message):
-		if message.author == client.user:
-			return
-    if message.content == '!import':
-        path = "https://onedrive.live.com/view.aspx?resid=FFA97C0083E35D4A!106&ithint=file%2cxlsx&authkey=!AGRmMBYkmOqYaMo"
-		wb_obj = openpyxl.load_workbook(path)
-		sheet_obj = wb_obj.active
- 
-# print the total number of rows
-		print(sheet_obj.max_row)
-        await message.channel.send(response)
-		
+	
 	@commands.command(name='!형')
 	async def brother2_(self, ctx):
 		if basicSetting[21] != "1":
